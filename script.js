@@ -1,21 +1,22 @@
-const canvas = document.querySelector("#canvas");
-const FOOTER_HEIGHT = 40;
-const NUMBER = 5;
-const IMAGE_WIDTH = 40;
-const IMAGE_HEIGHT = IMAGE_WIDTH;
+const ROCK = [];
+const PAPER = [];
+const SCISSOR = [];
+for (let i = 0; i < NUMBER; ++i) {
+  ROCK.push(new Sprite("rock.svg"));
+  PAPER.push(new Sprite("paper.svg"));
+  SCISSOR.push(new Sprite("scissor.svg"));
+}
 
-let width = window.innerWidth;
-let height = window.innerHeight - FOOTER_HEIGHT;
-let ctx = canvas.getContext("2d");
+function draw_all() {
+  ctx.clearRect(0, 0, width, height);
 
-window.addEventListener("resize", render);
+  for (let i = 0; i < NUMBER; ++i) {
+    ROCK[i].draw();
+    PAPER[i].draw();
+    SCISSOR[i].draw();
+  }
 
-function draw_image(path, x, y) {
-  const img = new Image();
-  img.addEventListener("load", () => {
-    ctx.drawImage(img, x, y);
-  });
-  img.src = path;
+  window.requestAnimationFrame(draw_all);
 }
 
 function render() {
@@ -25,23 +26,8 @@ function render() {
   canvas.width = width;
   canvas.height = height;
 
-  for (let i = 0; i < NUMBER; ++i) {
-    let x = Math.random() * width - IMAGE_WIDTH;
-    let y = Math.random() * height - IMAGE_HEIGHT;
-    x < 0 ? x = 0 : 1;
-    y < 0 ? y = 0 : 1;
-    draw_image("rock.svg", x, y);
-    x = Math.random() * width - IMAGE_WIDTH;
-    y = Math.random() * height - IMAGE_HEIGHT;
-    x < 0 ? x = 0 : 1;
-    y < 0 ? y = 0 : 1;
-    draw_image("paper.svg", x, y);
-    x = Math.random() * width - IMAGE_WIDTH;
-    y = Math.random() * height - IMAGE_HEIGHT;
-    x < 0 ? x = 0 : 1;
-    y < 0 ? y = 0 : 1;
-    draw_image("sissor.svg", x, y);
-  }
+  window.requestAnimationFrame(draw_all);
 }
 
 render();
+window.addEventListener("resize", render);
