@@ -1,5 +1,5 @@
 const FOOTER_HEIGHT = 40;
-const NUMBER = 3
+const NUMBER = 10;
 const IMAGE_WIDTH = 40;
 const IMAGE_HEIGHT = 40;
 
