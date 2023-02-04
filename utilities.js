@@ -1,5 +1,5 @@
 const FOOTER_HEIGHT = 40;
-const NUMBER = 10;
+const NUMBER = 7;
 const IMAGE_WIDTH = 40;
 const IMAGE_HEIGHT = 40;
 
@@ -16,8 +16,8 @@ class Sprite {
     this.y = Math.floor(Math.random() * (height - FOOTER_HEIGHT - IMAGE_HEIGHT));
     this.image = new Image();
     this.image.src = path;
-    this.delta_x = 1.5;
-    this.delta_y = 1.5;
+    this.delta_x = 1.0;
+    this.delta_y = 1.0;
     this.type = type;
   }
   change_direction() {
