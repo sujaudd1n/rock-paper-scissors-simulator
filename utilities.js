@@ -1,5 +1,5 @@
-const FOOTER_HEIGHT = 40;
 const NUMBER = 7;
+const FOOTER_HEIGHT = 40;
 const IMAGE_WIDTH = 40;
 const IMAGE_HEIGHT = 40;
 
@@ -12,32 +12,48 @@ const ctx = canvas.getContext("2d");
 class Sprite {
   constructor(path, type) {
     this.path = path;
-    this.x = Math.floor(Math.random() * (width - IMAGE_WIDTH));
-    this.y = Math.floor(Math.random() * (height - FOOTER_HEIGHT - IMAGE_HEIGHT));
+    this.type = type;
+    this.x = this.get_x_position();
+    this.y = this.get_y_position();
+    this.delta_x = this.get_motion();
+    this.delta_y = this.get_motion();
     this.image = new Image();
     this.image.src = path;
-    this.delta_x = 1.0;
-    this.delta_y = 1.0;
-    this.type = type;
   }
-  change_direction() {
-    if (this.x >= width - IMAGE_WIDTH) this.delta_x *= -1;
-    else if (this.x <= 0) this.delta_x *= -1;
-    if (this.y >= height - IMAGE_HEIGHT) this.delta_y *= -1;
-    else if (this.y <= 0) this.delta_y *= -1;
+  get_x_position() {
+    return Math.floor(Math.random() * (width - IMAGE_WIDTH));
   }
-  change_direction_collide()
-  {
-    this.delta_x *= -1;
-    this.delta_y *= -1;
+  get_y_position() {
+    return Math.floor(Math.random() * (height - FOOTER_HEIGHT - IMAGE_HEIGHT));
   }
-  change_position() {
-    this.x += this.delta_x;
-    this.y += this.delta_y;
+  get_motion() {
+    return (
+      (Math.random() * (1.5 - 1) + 1) * [1, -1][Math.floor(Math.random() * 2)]
+    );
   }
   draw() {
     this.change_direction();
     this.change_position();
     ctx.drawImage(this.image, this.x, this.y);
+  }
+  change_direction() {
+    if (this.x + this.delta_x > width - IMAGE_WIDTH) {
+      this.delta_x *= -1;
+    } else if (this.x + this.delta_x < 0) {
+      this.delta_x *= -1;
+    }
+    if (this.y + this.delta_y > height - IMAGE_HEIGHT - FOOTER_HEIGHT) {
+      this.delta_y *= -1;
+    } else if (this.y + this.delta_y < 0) {
+      this.delta_y *= -1;
+    }
+  }
+  change_position() {
+    this.x += this.delta_x;
+    this.y += this.delta_y;
+  }
+  change_direction_on_collide() {
+    this.delta_x = this.get_motion();
+    this.delta_y = this.get_motion();
   }
 }

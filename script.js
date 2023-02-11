@@ -4,6 +4,10 @@ for (let i = 0; i < NUMBER; ++i) {
   SPRITES.push(new Sprite("paper.svg", "PAPER"));
   SPRITES.push(new Sprite("scissor.svg", "SCISSOR"));
 }
+render();
+window.addEventListener("resize", render);
+
+setInterval(detect_collision, 10);
 
 function change_sprite(a, b) {
   if (a.type !== b.type) {
@@ -27,44 +31,31 @@ function change_sprite(a, b) {
       b.image.src = a.image.src;
     }
 
-    a.change_direction_collide();
-    b.change_direction_collide();
+    a.change_direction_on_collide();
+    b.change_direction_on_collide();
 
-    a.x += 10 * a.delta_x;
-    a.y += 10 * a.delta_y;
-
-    b.x += 10 * b.delta_x;
-    b.y += 10 * b.delta_y;
+    a.change_position();
+    b.change_position();
   }
 }
 
 function detect_collision() {
-  for (let i = 0; i < SPRITES.length - 1; ++i) {
-    for (let j = i + 1; j < SPRITES.length; ++j) {
-      let cx = Math.abs(SPRITES[i].x - SPRITES[j].x);
-      let cy = Math.abs(SPRITES[i].y - SPRITES[j].y);
-
-      if (
-        Math.abs(SPRITES[i].x - SPRITES[j].x) <= IMAGE_WIDTH &&
-        Math.abs(SPRITES[i].y - SPRITES[j].y) <= IMAGE_HEIGHT
-      ) {
-        console.log(i, j, "x = ", cx);
-        console.log(i, j, "y = ", cy);
-
-        change_sprite(SPRITES[i], SPRITES[j]);
+  for (let i = 0; i < SPRITES.length; ++i) {
+    for (let j = 0; j < SPRITES.length; ++j) {
+      if (i !== j) {
+        if (
+          Math.abs(SPRITES[i].x - SPRITES[j].x) < IMAGE_WIDTH &&
+          Math.abs(SPRITES[i].y - SPRITES[j].y) < IMAGE_HEIGHT
+        )
+          change_sprite(SPRITES[i], SPRITES[j]);
       }
     }
   }
 }
 
-setInterval(detect_collision, 10);
-
 function draw_all() {
   ctx.clearRect(0, 0, width, height);
-
-  for (let i = 0; i < SPRITES.length; ++i) {
-    SPRITES[i].draw();
-  }
+  for (let i = 0; i < SPRITES.length; ++i) SPRITES[i].draw();
   window.requestAnimationFrame(draw_all);
 }
 
@@ -77,6 +68,3 @@ function render() {
 
   window.requestAnimationFrame(draw_all);
 }
-
-render();
-window.addEventListener("resize", render);

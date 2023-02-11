@@ -4,3 +4,26 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body
+{
+    background-color: #222226;
+    height: 100vh;
+    color: #eee;
+}
+
+canvas
+{
+    display: block;
+}
+
+footer
+{
+    background-color: #33333a;
+    height: 40px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+}
