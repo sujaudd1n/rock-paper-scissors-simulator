@@ -2,6 +2,7 @@ const NUMBER = 7;
 const FOOTER_HEIGHT = 40;
 const IMAGE_WIDTH = 40;
 const IMAGE_HEIGHT = 40;
+let MAX_SPEED = 1.5;
 
 let width = window.innerWidth;
 let height = window.innerHeight - FOOTER_HEIGHT;
@@ -28,7 +29,7 @@ class Sprite {
   }
   get_motion() {
     return (
-      (Math.random() * (1.5 - 1) + 1) * [1, -1][Math.floor(Math.random() * 2)]
+      (Math.random() * (MAX_SPEED - 1) + 1) * [1, -1][Math.floor(Math.random() * 2)]
     );
   }
   draw() {

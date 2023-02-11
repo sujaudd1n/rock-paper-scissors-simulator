@@ -8,6 +8,17 @@ render();
 window.addEventListener("resize", render);
 
 setInterval(detect_collision, 10);
+setInterval(detect_two, 10);
+function detect_two() {
+  let data = [0, 0, 0];
+  for (let item of SPRITES) {
+    if (item.type === "ROCK") data[0] = 1;
+    else if (item.type === "PAPER") data[1] = 1;
+    else data[2] = 1;
+  }
+  if (data[0] + data[1] + data[2] <= 2)
+    MAX_SPEED = 7;
+}
 
 function change_sprite(a, b) {
   if (a.type !== b.type) {
