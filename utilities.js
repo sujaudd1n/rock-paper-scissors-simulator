@@ -4,7 +4,7 @@ const NUMBER = 7;
 const FOOTER_HEIGHT = 40;
 const IMAGE_WIDTH = 40;
 const IMAGE_HEIGHT = 40;
-let MAX_SPEED = 30.5;
+let MAX_SPEED = 1.5;
 
 let width = window.innerWidth;
 let height = window.innerHeight - FOOTER_HEIGHT;
