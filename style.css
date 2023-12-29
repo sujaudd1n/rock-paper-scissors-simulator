@@ -1,29 +1,45 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body
-{
+body {
     background-color: #222226;
     height: 100vh;
     color: #eee;
+    font-family: monospace;
 }
 
-canvas
-{
+a {
+    text-decoration: none;
+    color: #1e90ff;
+}
+
+canvas {
     display: block;
 }
 
-footer
-{
+footer {
     background-color: #33333a;
     height: 40px;
     padding: 10px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    font-size: 90%;
+}
 
+.winnder-card {
+    position: absolute;
+    width: 90vw;
+    max-width: 600px;
+    padding: 20px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 32px;
+    background: white;
+    color: black;
 }
